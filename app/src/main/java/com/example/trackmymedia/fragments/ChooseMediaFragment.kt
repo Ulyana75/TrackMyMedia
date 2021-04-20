@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.trackmymedia.databinding.FragmentChooseMediaBinding
+import com.example.trackmymedia.utilits.TypesMedia
+import com.example.trackmymedia.utilits.replaceFragment
+import kotlinx.android.synthetic.main.fragment_choose_media.*
 import kotlinx.android.synthetic.main.main_screen_choose_item.view.*
 
 
@@ -32,6 +35,23 @@ class ChooseMediaFragment : Fragment() {
         binding.buttonSeries.textView.text = "Сериалы"
         binding.buttonBooks.textView.text = "Книги"
         binding.buttonGames.textView.text = "Игры"
+
+        binding.buttonFilms.mainChooseItem.setOnClickListener {
+            replaceFragment(ChooseListFragment(TypesMedia.FILM,
+                "Просмотрено", "Планирую посмотреть"), true)
+        }
+        binding.buttonGames.mainChooseItem.setOnClickListener {
+            replaceFragment(ChooseListFragment(TypesMedia.GAME,
+                "Пройдено", "Планирую пройти"), true)
+        }
+        binding.buttonBooks.mainChooseItem.setOnClickListener {
+            replaceFragment(ChooseListFragment(TypesMedia.BOOK,
+                "Прочитано", "Планирую прочитать"), true)
+        }
+        binding.buttonSeries.mainChooseItem.setOnClickListener {
+            replaceFragment(ChooseListFragment(TypesMedia.SERIES,
+                "Просмотрено", "Планирую посмотреть"), true)
+        }
     }
 
 }

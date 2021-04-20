@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.EditingFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_for_editing"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_editing_done">
+
+        <TextView
+            android:id="@+id/text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/editing_name"
+            style="@style/main_text"
+            android:layout_marginTop="@dimen/app_margin_normal"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/text_name"
+            android:hint="@string/editing_name_hint"
+            style="@style/main_text"
+            android:maxLength="140"
+            android:maxLines="10"
+            android:textSize="@dimen/text_size_small"
+            android:textColorHint="@color/colorGray"
+            android:inputType="textCapSentences|textMultiLine"
+            android:isScrollContainer="true"/>
+
+        <TextView
+            android:id="@+id/text_rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/editing_rate"
+            style="@style/main_text"
+            android:layout_marginTop="@dimen/app_margin_normal"
+            app:layout_constraintTop_toBottomOf="@+id/edit_name"/>
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seek_bar"
+            android:layout_marginTop="@dimen/app_margin_normal"
+            app:layout_constraintTop_toBottomOf="@+id/text_rate"
+            android:max="10"
+            android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:progress="5"/>
+
+        <TextView
+            android:id="@+id/text_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/editing_description"
+            style="@style/main_text"
+            android:layout_marginTop="@dimen/app_margin_normal"
+            app:layout_constraintTop_toBottomOf="@id/seek_bar"/>
+
+        <EditText
+            android:id="@+id/edit_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/text_description"
+            android:hint="@string/editing_description_hint"
+            style="@style/main_text"
+            android:textSize="@dimen/text_size_small"
+            android:textColorHint="@color/colorGray"
+            android:inputType="textCapSentences|textMultiLine"
+            android:gravity="top"
+            android:isScrollContainer="true"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:id="@+id/button_editing_done"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/ic_check"
+        android:layout_margin="@dimen/app_margin_normal"
+        app:rippleColor="@color/colorPrimaryDark"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
