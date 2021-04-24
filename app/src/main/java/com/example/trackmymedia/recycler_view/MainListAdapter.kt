@@ -3,11 +3,17 @@ package com.example.trackmymedia.recycler_view
 import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trackmymedia.R
 import com.example.trackmymedia.database.entities.MediaEntity
+import com.example.trackmymedia.fragments.DialogRate
+import com.example.trackmymedia.fragments.MainListFragment
+import com.example.trackmymedia.utilits.APP_ACTIVITY
+import com.example.trackmymedia.utilits.LENGTH_DESCRIPTION
+import com.example.trackmymedia.utilits.TypesLists
 
 class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEntity>>) :
     RecyclerView.Adapter<MainListHolder>() {
@@ -22,7 +28,24 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: MainListHolder, position: Int) {
-        holder.name.text = liveData.value?.get(position)?.name
-        holder.description.text = liveData.value?.get(position)?.description?.substring(0, 30) + "..."
+        val entity = liveData.value?.get(position)
+        val description = entity?.description ?: ""
+
+        holder.name.text = entity?.name
+        holder.description.text =
+            if (description.length > LENGTH_DESCRIPTION) description.substring(
+                0,
+                30
+            ) + "..." else description
+
+        if (entity?.typeList == TypesLists.DONE) {
+            holder.doneButton.visibility = View.GONE
+        } else {
+            holder.doneButton.visibility = View.VISIBLE
+            holder.doneButton.setOnClickListener {
+                DialogRate(entity, liveData).show(APP_ACTIVITY.supportFragmentManager, null)
+                notifyItemChanged(position)
+            }
+        }
     }
 }

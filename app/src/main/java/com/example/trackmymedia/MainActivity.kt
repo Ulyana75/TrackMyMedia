@@ -1,5 +1,6 @@
 package com.example.trackmymedia
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar

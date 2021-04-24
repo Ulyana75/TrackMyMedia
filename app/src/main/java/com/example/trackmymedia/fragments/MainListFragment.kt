@@ -1,7 +1,7 @@
 package com.example.trackmymedia.fragments
 
+import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,10 +19,9 @@ import com.example.trackmymedia.utilits.APP_ACTIVITY
 import com.example.trackmymedia.utilits.TypesLists
 import com.example.trackmymedia.utilits.TypesMedia
 import com.example.trackmymedia.utilits.replaceFragment
+import kotlinx.android.synthetic.main.dialog_rate.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import java.lang.Appendable
 
 
 class MainListFragment(private val typeMedia: TypesMedia, private val typeLists: TypesLists) :

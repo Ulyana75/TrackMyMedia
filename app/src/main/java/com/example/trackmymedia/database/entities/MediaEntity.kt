@@ -11,13 +11,13 @@ import com.example.trackmymedia.utilits.TypesMedia
 
 @Entity(tableName = "Media")
 data class MediaEntity (
-    val name: String,
-    val description: String,
-    val rating: Int,
+    var name: String,
+    var description: String,
+    var rating: Int,
     @field:TypeConverters(TypesConverter::class)
     val type: TypesMedia,
     @field:TypeConverters(TypesConverter::class)
-    val typeList: TypesLists
+    var typeList: TypesLists
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

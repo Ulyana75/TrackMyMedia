@@ -16,4 +16,8 @@
     <string name="editing_description">Описание</string>
     <string name="editing_description_hint">Введите описание</string>
     <string name="editing_rate">Оценка</string>
+    <string name="dialog_button_text_cancel">Отмена</string>
+    <string name="dialog_button_text_dont_rate">Не оценивать</string>
+    <string name="dialog_button_text_done">Готово</string>
+    <string name="dialog_title_rate">Оцените</string>
 </resources>
