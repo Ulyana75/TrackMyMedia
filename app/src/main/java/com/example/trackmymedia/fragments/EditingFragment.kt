@@ -1,19 +1,16 @@
 package com.example.trackmymedia.fragments
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.trackmymedia.R
+import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import com.example.trackmymedia.database.AppDatabase
 import com.example.trackmymedia.database.entities.MediaEntity
 import com.example.trackmymedia.databinding.FragmentEditingBinding
-import com.example.trackmymedia.utilits.APP_ACTIVITY
-import com.example.trackmymedia.utilits.NO_RATING_VALUE
-import com.example.trackmymedia.utilits.TypesLists
-import com.example.trackmymedia.utilits.TypesMedia
+import com.example.trackmymedia.utilits.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -42,13 +39,21 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
             binding.seekBar.visibility = View.GONE
         }
         binding.buttonEditingDone.setOnClickListener {
-            addEntity()
-            APP_ACTIVITY.supportFragmentManager.popBackStack()
+            if (addEntity()) {
+                APP_ACTIVITY.supportFragmentManager.popBackStack()
+            }
         }
+        binding.editName.requestFocus()
+        val inputMethodManager = APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
-    private fun addEntity() {
+    private fun addEntity(): Boolean {
         val name = binding.editName.text.toString()
+        if(name == "") {
+            showToast("Введите название!")
+            return false
+        }
         val description = binding.editDescription.text.toString()
         val rate = if(typeLists == TypesLists.PLANNING) {
             NO_RATING_VALUE
@@ -61,7 +66,7 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
                 MediaEntity(name, description, rate, typeMedia, typeLists)
             )
         }
-
+        return true
     }
 
 }

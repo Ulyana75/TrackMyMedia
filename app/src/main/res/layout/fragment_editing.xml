@@ -34,7 +34,10 @@
             android:textSize="@dimen/text_size_small"
             android:textColorHint="@color/colorGray"
             android:inputType="textCapSentences|textMultiLine"
-            android:isScrollContainer="true"/>
+            android:isScrollContainer="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            />
 
         <TextView
             android:id="@+id/text_rate"
