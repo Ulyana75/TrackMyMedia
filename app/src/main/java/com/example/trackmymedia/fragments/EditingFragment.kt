@@ -31,6 +31,7 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
     override fun onStart() {
         super.onStart()
         initViews()
+        addButtonBack()
     }
 
     private fun initViews() {
@@ -67,6 +68,12 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
             )
         }
         return true
+    }
+
+    override fun onStop() {
+        super.onStop()
+        val inputMethodManager = APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(APP_ACTIVITY.currentFocus?.windowToken, 0)
     }
 
 }

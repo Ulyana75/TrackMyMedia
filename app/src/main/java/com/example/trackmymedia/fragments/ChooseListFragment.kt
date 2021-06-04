@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.trackmymedia.R
 import com.example.trackmymedia.databinding.FragmentChooseListBinding
-import com.example.trackmymedia.utilits.TypesLists
-import com.example.trackmymedia.utilits.TypesMedia
-import com.example.trackmymedia.utilits.replaceFragment
+import com.example.trackmymedia.utilits.*
 
 
 class ChooseListFragment(private val typeMedia: TypesMedia, private val text_button_done: String,
@@ -29,6 +27,8 @@ class ChooseListFragment(private val typeMedia: TypesMedia, private val text_but
     override fun onStart() {
         super.onStart()
         initViews()
+        addButtonBack()
+        APP_ACTIVITY.title = typeMedia.getStringOnRussian()
     }
 
     private fun initViews() {

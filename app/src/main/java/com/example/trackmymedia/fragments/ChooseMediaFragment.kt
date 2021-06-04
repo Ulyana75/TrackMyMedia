@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.trackmymedia.databinding.FragmentChooseMediaBinding
+import com.example.trackmymedia.utilits.APP_ACTIVITY
 import com.example.trackmymedia.utilits.TypesMedia
+import com.example.trackmymedia.utilits.removeButtonBack
 import com.example.trackmymedia.utilits.replaceFragment
 import kotlinx.android.synthetic.main.fragment_choose_media.*
 import kotlinx.android.synthetic.main.main_screen_choose_item.view.*
@@ -28,13 +30,15 @@ class ChooseMediaFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         initViews()
+        removeButtonBack()
+        APP_ACTIVITY.title = "TrackMyMedia"
     }
 
     private fun initViews() {
-        binding.buttonFilms.textView.text = "Фильмы"
-        binding.buttonSeries.textView.text = "Сериалы"
-        binding.buttonBooks.textView.text = "Книги"
-        binding.buttonGames.textView.text = "Игры"
+        binding.buttonFilms.textView.text = TypesMedia.FILM.getStringOnRussian()
+        binding.buttonSeries.textView.text = TypesMedia.SERIES.getStringOnRussian()
+        binding.buttonBooks.textView.text = TypesMedia.BOOK.getStringOnRussian()
+        binding.buttonGames.textView.text = TypesMedia.GAME.getStringOnRussian()
 
         binding.buttonFilms.mainChooseItem.setOnClickListener {
             replaceFragment(ChooseListFragment(TypesMedia.FILM,

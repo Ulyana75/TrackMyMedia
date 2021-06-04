@@ -21,3 +21,14 @@ fun replaceFragment(fragment: Fragment, addToBackStack: Boolean) {
 fun showToast(message: String) {
     Toast.makeText(APP_ACTIVITY, message, Toast.LENGTH_SHORT).show()
 }
+
+fun addButtonBack() {
+    APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    APP_ACTIVITY.toolbar.setNavigationOnClickListener {
+        APP_ACTIVITY.supportFragmentManager.popBackStack()
+    }
+}
+
+fun removeButtonBack() {
+    APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+}
