@@ -17,7 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/button_done"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="@dimen/app_small_margin"/>
+        android:layout_marginEnd="@dimen/app_small_margin"
+        android:maxLines="1"/>
 
     <TextView
         android:id="@+id/text_item_description"
@@ -26,7 +27,8 @@
         app:layout_constraintTop_toBottomOf="@+id/text_item_name"
         app:layout_constraintStart_toStartOf="@+id/text_item_name"
         app:layout_constraintEnd_toEndOf="@+id/text_item_name"
-        tools:text="Описание" />
+        tools:text="Описание"
+        android:maxLines="1"/>
 
     <ImageButton
         android:id="@+id/button_done"

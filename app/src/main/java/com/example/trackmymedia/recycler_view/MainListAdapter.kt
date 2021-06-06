@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trackmymedia.R
 import com.example.trackmymedia.database.entities.MediaEntity
@@ -37,7 +38,7 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
         holder.description.text =
             if (description.length > LENGTH_DESCRIPTION) description.substring(
                 0,
-                30
+                LENGTH_DESCRIPTION
             ) + "..." else description
 
         if (entity?.typeList == TypesLists.DONE) {
@@ -46,7 +47,6 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
             holder.doneButton.visibility = View.VISIBLE
             holder.doneButton.setOnClickListener {
                 DialogRate(entity, liveData).show(APP_ACTIVITY.supportFragmentManager, null)
-                notifyItemChanged(position)
             }
         }
         holder.view.setOnClickListener {

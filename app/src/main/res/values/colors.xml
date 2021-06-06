@@ -8,16 +8,16 @@
     <color name="colorGray">#7C7C7C</color>
 
     <!-- Colors for background from rating. -->
-    <color name="rateZero">#FF4646</color>
-    <color name="rateOne">#FF5C46</color>
-    <color name="rateTwo">#FF8146</color>
-    <color name="rateThree">#FFA646</color>
-    <color name="rateFour">#FFCB46</color>
-    <color name="rateFive">#FFED46</color>
-    <color name="rateSix">#CEFF46</color>
-    <color name="rateSeven">#A3FF46</color>
-    <color name="rateEight">#77FF46</color>
-    <color name="rateNine">#52FF46</color>
-    <color name="rateTen">#1AFF31</color>
+    <color name="rateZero">#FFACAC</color>
+    <color name="rateOne">#FFB6AC</color>
+    <color name="rateTwo">#FFC6AB</color>
+    <color name="rateThree">#FFD6AA</color>
+    <color name="rateFour">#FFE8AD</color>
+    <color name="rateFive">#FFF7A9</color>
+    <color name="rateSix">#E8FFAA</color>
+    <color name="rateSeven">#D5FFAA</color>
+    <color name="rateEight">#C1FFAA</color>
+    <color name="rateNine">#B0FFAB</color>
+    <color name="rateTen">#98FFA2</color>
 
 </resources>

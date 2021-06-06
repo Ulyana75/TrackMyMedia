@@ -1,6 +1,7 @@
 package com.example.trackmymedia.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,7 +57,15 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
         layoutManager = LinearLayoutManager(APP_ACTIVITY)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
+        recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                scrollPosition = layoutManager.findFirstVisibleItemPosition()
+            }
+        })
         getEntities()
+        Log.d("LOL", scrollPosition.toString())
+        recyclerView.scrollToPosition(scrollPosition)
     }
 
     private fun initViews() {
@@ -69,6 +78,10 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
         GlobalScope.launch {
             liveData.postValue(AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().getAll(typeMedia, typeLists).toMutableList())
         }
+    }
+
+    companion object {
+        var scrollPosition = 0
     }
 
 }

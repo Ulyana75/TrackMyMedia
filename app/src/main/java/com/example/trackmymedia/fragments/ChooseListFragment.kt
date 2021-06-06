@@ -21,6 +21,7 @@ class ChooseListFragment(private val typeMedia: TypesMedia, private val text_but
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentChooseListBinding.inflate(inflater, container, false)
+        MainListFragment.scrollPosition = 0
         return binding.root
     }
 
