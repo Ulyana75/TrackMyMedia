@@ -58,6 +58,16 @@
             android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
             android:progress="5"/>
 
+        <CheckBox
+            android:id="@+id/no_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/seek_bar"
+            android:text="@string/dont_rate_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/app_small_margin"/>
+
         <TextView
             android:id="@+id/text_description"
             android:layout_width="match_parent"
@@ -65,7 +75,7 @@
             android:text="@string/editing_description"
             style="@style/main_text"
             android:layout_marginTop="@dimen/app_margin_normal"
-            app:layout_constraintTop_toBottomOf="@id/seek_bar"/>
+            app:layout_constraintTop_toBottomOf="@id/no_rating"/>
 
         <EditText
             android:id="@+id/edit_description"

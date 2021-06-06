@@ -1,19 +1,21 @@
 package com.example.trackmymedia.recycler_view
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trackmymedia.R
 import com.example.trackmymedia.database.entities.MediaEntity
 import com.example.trackmymedia.fragments.DialogRate
+import com.example.trackmymedia.fragments.EditingFragment
 import com.example.trackmymedia.fragments.MainListFragment
-import com.example.trackmymedia.utilits.APP_ACTIVITY
-import com.example.trackmymedia.utilits.LENGTH_DESCRIPTION
-import com.example.trackmymedia.utilits.TypesLists
+import com.example.trackmymedia.utilits.*
 
 class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEntity>>) :
     RecyclerView.Adapter<MainListHolder>() {
@@ -46,6 +48,19 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
                 DialogRate(entity, liveData).show(APP_ACTIVITY.supportFragmentManager, null)
                 notifyItemChanged(position)
             }
+        }
+        holder.view.setOnClickListener {
+            replaceFragment(EditingFragment(entity!!.type, entity.typeList, entity), true)
+        }
+        setBackground(holder.view, entity?.rating)
+    }
+
+    private fun setBackground(view: View, rating: Int?) {
+        if(rating != null && rating != NO_RATING_VALUE) {
+            view.setBackgroundColor(ColorsManager.values()[rating].getColor())
+        }
+        else {
+            view.setBackgroundColor(0)
         }
     }
 }

@@ -15,7 +15,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: TypesLists) : Fragment() {
+class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: TypesLists,
+                      private val entity: MediaEntity? = null) : Fragment() {
 
     private lateinit var binding: FragmentEditingBinding
 
@@ -35,9 +36,11 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
     }
 
     private fun initViews() {
+        fillFields()
         if(typeLists == TypesLists.PLANNING) {
             binding.textRate.visibility = View.GONE
             binding.seekBar.visibility = View.GONE
+            binding.noRating.visibility = View.GONE
         }
         binding.buttonEditingDone.setOnClickListener {
             if (addEntity()) {
@@ -49,6 +52,20 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
+    private fun fillFields() {
+        if(entity != null) {
+            binding.editName.setText(entity.name)
+            binding.editDescription.setText(entity.description)
+            if(entity.rating == NO_RATING_VALUE) {
+                binding.seekBar.progress = binding.seekBar.max / 2
+                binding.noRating.isChecked = true
+            } else {
+                binding.seekBar.progress = entity.rating
+                binding.noRating.isChecked = false
+            }
+        }
+    }
+
     private fun addEntity(): Boolean {
         val name = binding.editName.text.toString()
         if(name == "") {
@@ -56,16 +73,25 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
             return false
         }
         val description = binding.editDescription.text.toString()
-        val rate = if(typeLists == TypesLists.PLANNING) {
+        val rate = if(typeLists == TypesLists.PLANNING || binding.noRating.isChecked) {
             NO_RATING_VALUE
         } else {
             binding.seekBar.progress
         }
 
-        GlobalScope.launch {
-            AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().insert(
-                MediaEntity(name, description, rate, typeMedia, typeLists)
-            )
+        if(entity == null) {
+            GlobalScope.launch {
+                AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().insert(
+                    MediaEntity(name, description, rate, typeMedia, typeLists)
+                )
+            }
+        } else {
+            entity.name = name
+            entity.description = description
+            entity.rating = rate
+            GlobalScope.launch {
+                AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().update(entity)
+            }
         }
         return true
     }
