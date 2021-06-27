@@ -1,21 +1,15 @@
 package com.example.trackmymedia.recycler_view
 
 import android.annotation.SuppressLint
-import android.content.res.Resources
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trackmymedia.R
 import com.example.trackmymedia.database.entities.MediaEntity
 import com.example.trackmymedia.fragments.DialogRate
 import com.example.trackmymedia.fragments.EditingFragment
-import com.example.trackmymedia.fragments.MainListFragment
 import com.example.trackmymedia.utilits.*
 
 class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEntity>>) :
@@ -54,7 +48,10 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
                 DialogRate(entity, liveData).show(APP_ACTIVITY.supportFragmentManager, null)
             }
         }
-        holder.view.setOnClickListener {
+        holder.name.setOnClickListener {
+            replaceFragment(EditingFragment(entity!!.type, entity.typeList, entity), true)
+        }
+        holder.description.setOnClickListener {
             replaceFragment(EditingFragment(entity!!.type, entity.typeList, entity), true)
         }
         setBackground(holder.view, entity?.rating)

@@ -12,5 +12,4 @@ class MainListHolder(val view: View): RecyclerView.ViewHolder(view) {
     val description: TextView = view.text_item_description
     val doneButton: ImageButton = view.button_done
 
-    val context = view.context
 }

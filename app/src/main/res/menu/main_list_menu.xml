@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/sort_by"
+        android:title="@string/menu_sort">
+
+        <menu>
+
+            <item android:id="@+id/sort_by_date_new_first"
+                android:title="@string/menu_sort_by_date_new_first"/>
+            <item android:id="@+id/sort_by_date_old_first"
+                android:title="@string/menu_sort_by_date_old_first"/>
+            <item android:id="@+id/sort_by_alphabet_a"
+                android:title="@string/menu_sort_by_alphabet_A_Z"/>
+            <item android:id="@+id/sort_by_alphabet_z"
+                android:title="@string/menu_sort_by_alphabet_Z_A"/>
+            <item android:id="@+id/sort_by_rating_good_first"
+                android:title="@string/menu_sort_by_rating_good_first"/>
+            <item android:id="@+id/sort_by_rating_bad_first"
+                android:title="@string/menu_sort_by_rating_bad_first"/>
+
+        </menu>
+
+    </item>
+
+    <item android:id="@+id/edit_list"
+        android:title="@string/menu_edit_list"/>
+
+</menu>

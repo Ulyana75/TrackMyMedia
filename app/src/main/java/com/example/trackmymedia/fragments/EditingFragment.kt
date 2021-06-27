@@ -1,5 +1,6 @@
 package com.example.trackmymedia.fragments
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +14,9 @@ import com.example.trackmymedia.databinding.FragmentEditingBinding
 import com.example.trackmymedia.utilits.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
+import android.util.Log
+import java.text.SimpleDateFormat
 
 
 class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: TypesLists,
@@ -82,7 +86,7 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
         if(entity == null) {
             GlobalScope.launch {
                 AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().insert(
-                    MediaEntity(name, description, rate, typeMedia, typeLists)
+                    MediaEntity(name, description, rate, typeMedia, typeLists, Calendar.getInstance().time)
                 )
             }
         } else {

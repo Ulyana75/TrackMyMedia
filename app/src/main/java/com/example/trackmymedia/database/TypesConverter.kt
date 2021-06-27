@@ -1,8 +1,13 @@
 package com.example.trackmymedia.database
 
+import android.annotation.SuppressLint
 import androidx.room.TypeConverter
+import com.example.trackmymedia.utilits.DATE_FORMAT
 import com.example.trackmymedia.utilits.TypesLists
 import com.example.trackmymedia.utilits.TypesMedia
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.*
 
 class TypesConverter {
 
@@ -28,6 +33,20 @@ class TypesConverter {
             "PLANNING" -> TypesLists.PLANNING
             else -> TypesLists.DONE
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @TypeConverter
+    fun fromDate(date: Date): String {
+        val formatter = SimpleDateFormat(DATE_FORMAT)
+        return formatter.format(date)
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    @TypeConverter
+    fun toDate(date: String): Date {
+        val formatter = SimpleDateFormat(DATE_FORMAT)
+        return formatter.parse(date)!!
     }
 
 }

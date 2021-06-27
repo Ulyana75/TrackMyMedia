@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.dialog_rate.*
 import kotlinx.android.synthetic.main.dialog_rate.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 class DialogRate(private val entity: MediaEntity?,
                  private val liveData: MutableLiveData<MutableList<MediaEntity>>) : DialogFragment() {
@@ -41,6 +42,7 @@ class DialogRate(private val entity: MediaEntity?,
                 removeEntityFromLiveData(entity)
                 entity.rating = _view.seek_bar.progress
                 entity.typeList = TypesLists.DONE
+                entity.date = Calendar.getInstance().time
                 GlobalScope.launch {
                     AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().update(entity)
                 }
@@ -52,6 +54,7 @@ class DialogRate(private val entity: MediaEntity?,
             if (entity != null) {
                 removeEntityFromLiveData(entity)
                 entity.typeList = TypesLists.DONE
+                entity.date = Calendar.getInstance().time
                 GlobalScope.launch {
                     AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().update(entity)
                 }

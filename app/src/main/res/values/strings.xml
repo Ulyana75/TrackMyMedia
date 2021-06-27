@@ -22,4 +22,12 @@
     <string name="dialog_title_rate">Оцените</string>
     <string name="dont_rate_text">Не оценивать</string>
     <string name="default_id">0</string>
+    <string name="menu_sort">Сортировать</string>
+    <string name="menu_sort_by_date_new_first">по дате: сначала новые</string>
+    <string name="menu_sort_by_date_old_first">по дате: сначала старые</string>
+    <string name="menu_sort_by_alphabet_A_Z">по алфавиту: А-Я</string>
+    <string name="menu_sort_by_alphabet_Z_A">по алфавиту: Я-А</string>
+    <string name="menu_sort_by_rating_good_first">по рейтингу: сначала хорошие</string>
+    <string name="menu_sort_by_rating_bad_first">по рейтингу: сначала плохие</string>
+    <string name="menu_edit_list">Редактировать список</string>
 </resources>
