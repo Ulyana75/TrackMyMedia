@@ -2,9 +2,7 @@ package com.example.trackmymedia.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -15,6 +13,7 @@ import com.example.trackmymedia.database.entities.MediaEntity
 import com.example.trackmymedia.databinding.FragmentMainListBinding
 import com.example.trackmymedia.recycler_view.MainListAdapter
 import com.example.trackmymedia.utilits.*
+import kotlinx.android.synthetic.main.recyclerview_item.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -27,6 +26,9 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
     private lateinit var adapter: MainListAdapter
     private lateinit var layoutManager: LinearLayoutManager
     private val liveData = MutableLiveData<MutableList<MediaEntity>>()
+
+    private val idMenuDelete = 1
+    private var selectedView: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,6 +84,33 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
 
     companion object {
         var scrollPosition = 0
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menu.add(Menu.NONE, idMenuDelete, Menu.NONE, "Удалить")
+        selectedView = v
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        if(selectedView != null) {
+            when (item.itemId) {
+                idMenuDelete -> {
+                    GlobalScope.launch {
+                        val id = selectedView!!.contentDescription.toString().toInt()
+                        val entity = AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().findById(id)
+                        liveData.value?.remove(entity)
+                        AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().delete(entity)
+                        getEntities()
+                    }
+                }
+            }
+        }
+        return true
     }
 
 }

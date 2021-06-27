@@ -24,7 +24,10 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainListHolder {
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_item, parent, false)
-        return MainListHolder(view)
+        val holder = MainListHolder(view)
+        getCurrentFragment().registerForContextMenu(holder.name)
+        getCurrentFragment().registerForContextMenu(holder.description)
+        return holder
     }
 
     override fun getItemCount(): Int = liveData.value?.size ?: 0
@@ -34,6 +37,8 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
         val entity = liveData.value?.get(position)
         val description = entity?.description ?: ""
 
+        holder.description.contentDescription = entity?.id.toString()
+        holder.name.contentDescription = entity?.id.toString()
         holder.name.text = entity?.name
         holder.description.text =
             if (description.length > LENGTH_DESCRIPTION) description.substring(

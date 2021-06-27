@@ -21,4 +21,5 @@
     <string name="dialog_button_text_done">Готово</string>
     <string name="dialog_title_rate">Оцените</string>
     <string name="dont_rate_text">Не оценивать</string>
+    <string name="default_id">0</string>
 </resources>
