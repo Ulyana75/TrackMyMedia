@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.MutableLiveData
 import com.example.trackmymedia.R
@@ -30,6 +32,7 @@ class DialogRate(private val entity: MediaEntity?,
 
     private lateinit var _view: View
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         _view = APP_ACTIVITY.layoutInflater.inflate(R.layout.dialog_rate, null)
         val alertBuilder = AlertDialog.Builder(APP_ACTIVITY)
@@ -38,6 +41,7 @@ class DialogRate(private val entity: MediaEntity?,
         return alertBuilder.create()
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun initButtons() {
 
         _view.seek_bar.splitTrack = false

@@ -5,6 +5,7 @@
             <gradient
                 android:endColor="@color/rateTen"
                 android:startColor="@color/rateZero"/>
+            <corners android:radius="10dp"/>
         </shape>
     </item>
 </layer-list>

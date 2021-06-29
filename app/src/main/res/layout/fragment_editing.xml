@@ -41,7 +41,9 @@
             android:isScrollContainer="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            />
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textCursorDrawable="@drawable/cursor_drawable"
+            android:textColorHighlight="@color/colorAccent"/>
 
         <TextView
             android:id="@+id/text_rate"
@@ -82,7 +84,8 @@
             android:text="@string/dont_rate_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/app_small_margin"/>
+            android:layout_marginTop="@dimen/app_small_margin"
+            />
 
         <TextView
             android:id="@+id/text_description"
@@ -104,7 +107,10 @@
             android:textColorHint="@color/colorGray"
             android:inputType="textCapSentences|textMultiLine"
             android:gravity="top"
-            android:isScrollContainer="true"/>
+            android:isScrollContainer="true"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textCursorDrawable="@drawable/cursor_drawable"
+            android:textColorHighlight="@color/colorAccent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

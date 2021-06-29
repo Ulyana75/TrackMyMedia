@@ -23,7 +23,7 @@
         android:layout_columnWeight="1"
         layout="@layout/main_screen_choose_item"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        android:layout_width="wrap_content" />
 
     <include
         android:id="@+id/button_books"

@@ -53,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="@string/dialog_button_text_cancel"/>
+            android:text="@string/dialog_button_text_cancel"
+            android:backgroundTint="@color/colorAccent"/>
 
         <Button
             android:id="@+id/button_dont_rate"
@@ -62,7 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="@string/dialog_button_text_dont_rate"/>
+            android:text="@string/dialog_button_text_dont_rate"
+            android:backgroundTint="@color/colorAccent"/>
 
         <Button
             android:id="@+id/button_done"
@@ -71,7 +73,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:text="@string/dialog_button_text_done"/>
+            android:text="@string/dialog_button_text_done"
+            android:backgroundTint="@color/colorAccent"/>
 
 
     </LinearLayout>

@@ -1,10 +1,14 @@
 package com.example.trackmymedia.fragments
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import com.example.trackmymedia.R
 import com.example.trackmymedia.databinding.FragmentChooseMediaBinding
 import com.example.trackmymedia.utilits.APP_ACTIVITY
 import com.example.trackmymedia.utilits.TypesMedia
@@ -27,6 +31,7 @@ class ChooseMediaFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onStart() {
         super.onStart()
         initViews()
@@ -34,11 +39,18 @@ class ChooseMediaFragment : Fragment() {
         APP_ACTIVITY.title = "TrackMyMedia"
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initViews() {
         binding.buttonFilms.textView.text = TypesMedia.FILM.getStringOnRussian()
         binding.buttonSeries.textView.text = TypesMedia.SERIES.getStringOnRussian()
         binding.buttonBooks.textView.text = TypesMedia.BOOK.getStringOnRussian()
         binding.buttonGames.textView.text = TypesMedia.GAME.getStringOnRussian()
+
+        binding.buttonFilms.imageView.setImageDrawable(APP_ACTIVITY.getDrawable(R.drawable.icon_films))
+        binding.buttonSeries.imageView.setImageDrawable(APP_ACTIVITY.getDrawable(R.drawable.icon_series))
+        binding.buttonBooks.imageView.setImageDrawable(APP_ACTIVITY.getDrawable(R.drawable.icon_book))
+        binding.buttonGames.imageView.setImageDrawable(APP_ACTIVITY.getDrawable(R.drawable.icon_games))
 
         binding.buttonFilms.mainChooseItem.setOnClickListener {
             replaceFragment(ChooseListFragment(TypesMedia.FILM,
