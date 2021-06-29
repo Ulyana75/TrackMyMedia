@@ -1,5 +1,6 @@
 package com.example.trackmymedia.fragments
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.MutableLiveData
 import com.example.trackmymedia.R
@@ -37,6 +39,25 @@ class DialogRate(private val entity: MediaEntity?,
     }
 
     private fun initButtons() {
+
+        _view.seek_bar.splitTrack = false
+
+        _view.seek_bar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+            @SuppressLint("SetTextI18n")
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                _view.rating_value.text = "$progress/10"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
+
         _view.button_done.setOnClickListener {
             if (entity != null) {
                 removeEntityFromLiveData(entity)

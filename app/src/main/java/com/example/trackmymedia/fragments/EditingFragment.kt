@@ -2,6 +2,7 @@ package com.example.trackmymedia.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 import android.util.Log
+import android.widget.SeekBar
+import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 
 
@@ -33,29 +36,58 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onStart() {
         super.onStart()
         initViews()
         addButtonBack()
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("SetTextI18n")
     private fun initViews() {
+        binding.seekBar.splitTrack = false
         fillFields()
         if(typeLists == TypesLists.PLANNING) {
             binding.textRate.visibility = View.GONE
             binding.seekBar.visibility = View.GONE
             binding.noRating.visibility = View.GONE
+            binding.ratingValue.visibility = View.GONE
         }
         binding.buttonEditingDone.setOnClickListener {
             if (addEntity()) {
                 APP_ACTIVITY.supportFragmentManager.popBackStack()
             }
         }
+        binding.noRating.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked) {
+                binding.ratingValue.text = "Нет оценки"
+            } else {
+                binding.ratingValue.text = binding.seekBar.progress.toString() + "/10"
+            }
+        }
+        binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if(!binding.noRating.isChecked) {
+                    binding.ratingValue.text = "$progress/10"
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
         binding.editName.requestFocus()
         val inputMethodManager = APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun fillFields() {
         if(entity != null) {
             binding.editName.setText(entity.name)
@@ -63,8 +95,10 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
             if(entity.rating == NO_RATING_VALUE) {
                 binding.seekBar.progress = binding.seekBar.max / 2
                 binding.noRating.isChecked = true
+                binding.ratingValue.text = "Нет оценки"
             } else {
                 binding.seekBar.progress = entity.rating
+                binding.ratingValue.text = entity.rating.toString() + "/10"
                 binding.noRating.isChecked = false
             }
         }

@@ -14,17 +14,29 @@
         android:layout_marginTop="@dimen/app_margin_normal"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rating_value"
+        app:layout_constraintTop_toBottomOf="@+id/text_rate"
+        style="@style/main_text"
+        android:textSize="6pt"
+        android:layout_marginTop="@dimen/app_small_margin"
+        android:text="@string/seekbar_default_rating_text"/>
+
     <SeekBar
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:id="@+id/seek_bar"
-        app:layout_constraintTop_toBottomOf="@id/text_rate"
+        app:layout_constraintTop_toBottomOf="@id/rating_value"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:max="10"
         android:layout_marginTop="@dimen/app_margin_normal"
         android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:progress="5"/>
+        android:progress="5"
+        android:progressDrawable="@drawable/seek_bar"
+        android:thumb="@drawable/ic_baseline_star_24"/>
 
     <LinearLayout
         android:layout_width="match_parent"
