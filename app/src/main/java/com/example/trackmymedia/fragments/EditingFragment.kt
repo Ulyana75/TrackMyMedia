@@ -87,11 +87,13 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun fillFields() {
+        val dateFormat = SimpleDateFormat("dd.MM.yyyy")
         if(entity != null) {
             binding.editName.setText(entity.name)
             binding.editDescription.setText(entity.description)
+            binding.textDate.text = "Дата добавления: " + dateFormat.format(entity.date)
             if(entity.rating == NO_RATING_VALUE) {
                 binding.seekBar.progress = binding.seekBar.max / 2
                 binding.noRating.isChecked = true
@@ -101,6 +103,8 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
                 binding.ratingValue.text = entity.rating.toString() + "/10"
                 binding.noRating.isChecked = false
             }
+        } else {
+            binding.textDate.text = "Дата добавления: " + dateFormat.format(Calendar.getInstance().time)
         }
     }
 

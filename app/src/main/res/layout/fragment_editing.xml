@@ -10,123 +10,135 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_for_editing"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/button_editing_done">
-
-        <TextView
-            android:id="@+id/text_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_for_editing"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/editing_name"
-            style="@style/main_text"
-            android:layout_marginTop="@dimen/app_margin_normal"
-            app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_editing_done">
 
-        <EditText
-            android:id="@+id/edit_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/text_name"
-            android:hint="@string/editing_name_hint"
-            style="@style/main_text"
-            android:maxLength="140"
-            android:maxLines="10"
-            android:textSize="@dimen/text_size_small"
-            android:textColorHint="@color/colorGray"
-            android:inputType="textCapSentences|textMultiLine"
-            android:isScrollContainer="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textCursorDrawable="@drawable/cursor_drawable"
-            android:textColorHighlight="@color/colorAccent"/>
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Дата добавления: 20.10.2001"
+                android:textAlignment="center"
+                android:layout_margin="@dimen/app_margin_normal"
+                android:gravity="center_horizontal" />
 
-        <TextView
-            android:id="@+id/text_rate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/editing_rate"
-            style="@style/main_text"
-            android:layout_marginTop="@dimen/app_margin_normal"
-            app:layout_constraintTop_toBottomOf="@+id/edit_name"/>
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/editing_name"
+                style="@style/main_text"
+                android:layout_marginTop="@dimen/app_margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/text_date"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/rating_value"
-            app:layout_constraintTop_toBottomOf="@+id/text_rate"
-            style="@style/main_text"
-            android:textSize="6pt"
-            android:layout_marginTop="@dimen/app_small_margin"
-            android:text="@string/seekbar_default_rating_text"/>
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/text_name"
+                android:hint="@string/editing_name_hint"
+                style="@style/main_text"
+                android:maxLength="140"
+                android:maxLines="10"
+                android:textSize="@dimen/text_size_small"
+                android:textColorHint="@color/colorGray"
+                android:inputType="textCapSentences|textMultiLine"
+                android:isScrollContainer="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                android:textColorHighlight="@color/colorAccent"/>
 
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seek_bar"
-            android:layout_marginTop="@dimen/app_margin_normal"
-            app:layout_constraintTop_toBottomOf="@+id/rating_value"
-            android:max="10"
-            android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:progress="5"
-            android:progressDrawable="@drawable/seek_bar"
-            android:thumb="@drawable/ic_baseline_star_24"/>
+            <TextView
+                android:id="@+id/text_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/editing_rate"
+                style="@style/main_text"
+                android:layout_marginTop="@dimen/app_margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/edit_name"/>
 
-        <CheckBox
-            android:id="@+id/no_rating"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rating_value"
+                app:layout_constraintTop_toBottomOf="@+id/text_rate"
+                style="@style/main_text"
+                android:textSize="6pt"
+                android:layout_marginTop="@dimen/app_small_margin"
+                android:text="@string/seekbar_default_rating_text"/>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seek_bar"
+                android:layout_marginTop="@dimen/app_margin_normal"
+                app:layout_constraintTop_toBottomOf="@+id/rating_value"
+                android:max="10"
+                android:theme="@style/Widget.AppCompat.SeekBar.Discrete"
+                android:progress="5"
+                android:progressDrawable="@drawable/seek_bar"
+                android:thumb="@drawable/ic_baseline_star_24"/>
+
+            <CheckBox
+                android:id="@+id/no_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/seek_bar"
+                android:text="@string/dont_rate_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/app_small_margin"
+                />
+
+            <TextView
+                android:id="@+id/text_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/editing_description"
+                style="@style/main_text"
+                android:layout_marginTop="@dimen/app_margin_normal"
+                app:layout_constraintTop_toBottomOf="@id/no_rating"/>
+
+            <EditText
+                android:id="@+id/edit_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/text_description"
+                android:hint="@string/editing_description_hint"
+                style="@style/main_text"
+                android:textSize="@dimen/text_size_small"
+                android:textColorHint="@color/colorGray"
+                android:inputType="textCapSentences|textMultiLine"
+                android:gravity="top"
+                android:isScrollContainer="true"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:textCursorDrawable="@drawable/cursor_drawable"
+                android:textColorHighlight="@color/colorAccent"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/seek_bar"
-            android:text="@string/dont_rate_text"
-            app:layout_constraintStart_toStartOf="parent"
+            android:backgroundTint="@color/colorPrimary"
+            android:id="@+id/button_editing_done"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/app_small_margin"
-            />
-
-        <TextView
-            android:id="@+id/text_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/editing_description"
-            style="@style/main_text"
-            android:layout_marginTop="@dimen/app_margin_normal"
-            app:layout_constraintTop_toBottomOf="@id/no_rating"/>
-
-        <EditText
-            android:id="@+id/edit_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/text_description"
-            android:hint="@string/editing_description_hint"
-            style="@style/main_text"
-            android:textSize="@dimen/text_size_small"
-            android:textColorHint="@color/colorGray"
-            android:inputType="textCapSentences|textMultiLine"
-            android:gravity="top"
-            android:isScrollContainer="true"
-            android:backgroundTint="@color/colorPrimaryDark"
-            android:textCursorDrawable="@drawable/cursor_drawable"
-            android:textColorHighlight="@color/colorAccent"/>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:id="@+id/button_editing_done"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/ic_check"
-        android:layout_margin="@dimen/app_margin_normal"
-        app:rippleColor="@color/colorPrimaryDark"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_check"
+            android:layout_margin="@dimen/app_margin_normal"
+            app:rippleColor="@color/colorPrimaryDark"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
