@@ -16,7 +16,7 @@ class TypesConverter {
 
     @TypeConverter
     fun toTypeMedia(type: String): TypesMedia {
-        return when(type) {
+        return when (type) {
             "FILM" -> TypesMedia.FILM
             "SERIES" -> TypesMedia.SERIES
             "GAME" -> TypesMedia.GAME
@@ -29,7 +29,7 @@ class TypesConverter {
 
     @TypeConverter
     fun toTypeList(type: String): TypesLists {
-        return when(type) {
+        return when (type) {
             "PLANNING" -> TypesLists.PLANNING
             else -> TypesLists.DONE
         }

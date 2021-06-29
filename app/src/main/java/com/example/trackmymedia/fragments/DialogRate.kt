@@ -27,8 +27,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-class DialogRate(private val entity: MediaEntity?,
-                 private val liveData: MutableLiveData<MutableList<MediaEntity>>) : DialogFragment() {
+class DialogRate(
+    private val entity: MediaEntity?,
+    private val liveData: MutableLiveData<MutableList<MediaEntity>>
+) : DialogFragment() {
 
     private lateinit var _view: View
 
@@ -46,7 +48,7 @@ class DialogRate(private val entity: MediaEntity?,
 
         _view.seek_bar.splitTrack = false
 
-        _view.seek_bar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
+        _view.seek_bar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 _view.rating_value.text = "$progress/10"

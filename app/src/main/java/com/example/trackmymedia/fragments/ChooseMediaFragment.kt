@@ -53,20 +53,36 @@ class ChooseMediaFragment : Fragment() {
         binding.buttonGames.imageView.setImageDrawable(APP_ACTIVITY.getDrawable(R.drawable.icon_games))
 
         binding.buttonFilms.mainChooseItem.setOnClickListener {
-            replaceFragment(ChooseListFragment(TypesMedia.FILM,
-                "Просмотрено", "Планирую посмотреть"), true)
+            replaceFragment(
+                ChooseListFragment(
+                    TypesMedia.FILM,
+                    "Просмотрено", "Планирую посмотреть"
+                ), true
+            )
         }
         binding.buttonGames.mainChooseItem.setOnClickListener {
-            replaceFragment(ChooseListFragment(TypesMedia.GAME,
-                "Пройдено", "Планирую пройти"), true)
+            replaceFragment(
+                ChooseListFragment(
+                    TypesMedia.GAME,
+                    "Пройдено", "Планирую пройти"
+                ), true
+            )
         }
         binding.buttonBooks.mainChooseItem.setOnClickListener {
-            replaceFragment(ChooseListFragment(TypesMedia.BOOK,
-                "Прочитано", "Планирую прочитать"), true)
+            replaceFragment(
+                ChooseListFragment(
+                    TypesMedia.BOOK,
+                    "Прочитано", "Планирую прочитать"
+                ), true
+            )
         }
         binding.buttonSeries.mainChooseItem.setOnClickListener {
-            replaceFragment(ChooseListFragment(TypesMedia.SERIES,
-                "Просмотрено", "Планирую посмотреть"), true)
+            replaceFragment(
+                ChooseListFragment(
+                    TypesMedia.SERIES,
+                    "Просмотрено", "Планирую посмотреть"
+                ), true
+            )
         }
     }
 

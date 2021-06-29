@@ -13,8 +13,10 @@ import com.example.trackmymedia.databinding.FragmentChooseListBinding
 import com.example.trackmymedia.utilits.*
 
 
-class ChooseListFragment(private val typeMedia: TypesMedia, private val text_button_done: String,
-                         private val text_button_planning: String) : Fragment() {
+class ChooseListFragment(
+    private val typeMedia: TypesMedia, private val text_button_done: String,
+    private val text_button_planning: String
+) : Fragment() {
 
     private lateinit var binding: FragmentChooseListBinding
 

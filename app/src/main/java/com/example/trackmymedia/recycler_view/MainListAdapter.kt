@@ -58,10 +58,9 @@ class MainListAdapter(private val liveData: MutableLiveData<MutableList<MediaEnt
     }
 
     private fun setBackground(view: View, rating: Int?) {
-        if(rating != null && rating != NO_RATING_VALUE) {
+        if (rating != null && rating != NO_RATING_VALUE) {
             view.setBackgroundColor(ColorsManager.values()[rating].getColor())
-        }
-        else {
+        } else {
             view.setBackgroundColor(0)
         }
     }

@@ -22,8 +22,10 @@ import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 
 
-class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: TypesLists,
-                      private val entity: MediaEntity? = null) : Fragment() {
+class EditingFragment(
+    private val typeMedia: TypesMedia, private val typeLists: TypesLists,
+    private val entity: MediaEntity? = null
+) : Fragment() {
 
     private lateinit var binding: FragmentEditingBinding
 
@@ -48,7 +50,7 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
     private fun initViews() {
         binding.seekBar.splitTrack = false
         fillFields()
-        if(typeLists == TypesLists.PLANNING) {
+        if (typeLists == TypesLists.PLANNING) {
             binding.textRate.visibility = View.GONE
             binding.seekBar.visibility = View.GONE
             binding.noRating.visibility = View.GONE
@@ -60,7 +62,7 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
             }
         }
         binding.noRating.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked) {
+            if (isChecked) {
                 binding.ratingValue.text = "Нет оценки"
             } else {
                 binding.ratingValue.text = binding.seekBar.progress.toString() + "/10"
@@ -68,7 +70,7 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
         }
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                if(!binding.noRating.isChecked) {
+                if (!binding.noRating.isChecked) {
                     binding.ratingValue.text = "$progress/10"
                 }
             }
@@ -83,18 +85,19 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
 
         })
         binding.editName.requestFocus()
-        val inputMethodManager = APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
     }
 
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     private fun fillFields() {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy")
-        if(entity != null) {
+        if (entity != null) {
             binding.editName.setText(entity.name)
             binding.editDescription.setText(entity.description)
             binding.textDate.text = "Дата добавления: " + dateFormat.format(entity.date)
-            if(entity.rating == NO_RATING_VALUE) {
+            if (entity.rating == NO_RATING_VALUE) {
                 binding.seekBar.progress = binding.seekBar.max / 2
                 binding.noRating.isChecked = true
                 binding.ratingValue.text = "Нет оценки"
@@ -104,27 +107,35 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
                 binding.noRating.isChecked = false
             }
         } else {
-            binding.textDate.text = "Дата добавления: " + dateFormat.format(Calendar.getInstance().time)
+            binding.textDate.text =
+                "Дата добавления: " + dateFormat.format(Calendar.getInstance().time)
         }
     }
 
     private fun addEntity(): Boolean {
         val name = binding.editName.text.toString()
-        if(name == "") {
+        if (name == "") {
             showToast("Введите название!")
             return false
         }
         val description = binding.editDescription.text.toString()
-        val rate = if(typeLists == TypesLists.PLANNING || binding.noRating.isChecked) {
+        val rate = if (typeLists == TypesLists.PLANNING || binding.noRating.isChecked) {
             NO_RATING_VALUE
         } else {
             binding.seekBar.progress
         }
 
-        if(entity == null) {
+        if (entity == null) {
             GlobalScope.launch {
                 AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().insert(
-                    MediaEntity(name, description, rate, typeMedia, typeLists, Calendar.getInstance().time)
+                    MediaEntity(
+                        name,
+                        description,
+                        rate,
+                        typeMedia,
+                        typeLists,
+                        Calendar.getInstance().time
+                    )
                 )
             }
         } else {
@@ -140,7 +151,8 @@ class EditingFragment(private val typeMedia: TypesMedia, private val typeLists: 
 
     override fun onStop() {
         super.onStop()
-        val inputMethodManager = APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            APP_ACTIVITY.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(APP_ACTIVITY.currentFocus?.windowToken, 0)
     }
 

@@ -9,7 +9,7 @@ import com.example.trackmymedia.utilits.TypesMedia
 import java.util.*
 
 @Entity(tableName = "Media")
-data class MediaEntity (
+data class MediaEntity(
     var name: String,
     var description: String,
     var rating: Int,

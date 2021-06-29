@@ -70,7 +70,7 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
         layoutManager = LinearLayoutManager(APP_ACTIVITY)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = layoutManager
-        recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 scrollPosition = layoutManager.findFirstVisibleItemPosition()
@@ -88,7 +88,12 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
 
     private fun getEntities() {
         GlobalScope.launch {
-            liveData.postValue(sortData(AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().getAll(typeMedia, typeLists).toMutableList()))
+            liveData.postValue(
+                sortData(
+                    AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().getAll(typeMedia, typeLists)
+                        .toMutableList()
+                )
+            )
         }
     }
 
@@ -107,12 +112,13 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        if(selectedView != null) {
+        if (selectedView != null) {
             when (item.itemId) {
                 idMenuDelete -> {
                     GlobalScope.launch {
                         val id = selectedView!!.contentDescription.toString().toInt()
-                        val entity = AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().findById(id)
+                        val entity =
+                            AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().findById(id)
                         liveData.value?.remove(entity)
                         AppDatabase.getInstance(APP_ACTIVITY).getMediaDao().delete(entity)
                         getEntities()
@@ -131,7 +137,7 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
-        if(typeLists == TypesLists.PLANNING) {
+        if (typeLists == TypesLists.PLANNING) {
             menu.findItem(R.id.sort_by_rating_bad_first).isEnabled = false
             menu.findItem(R.id.sort_by_rating_good_first).isEnabled = false
         } else {
@@ -142,7 +148,7 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         typeSort =
-            when(item.itemId) {
+            when (item.itemId) {
                 R.id.sort_by_date_new_first -> TypesSort.SORT_BY_DATE_NEW_FIRST
                 R.id.sort_by_date_old_first -> TypesSort.SORT_BY_DATE_OLD_FIRST
                 R.id.sort_by_alphabet_a -> TypesSort.SORT_BY_ALPHABET_A
@@ -156,7 +162,7 @@ class MainListFragment(private val typeMedia: TypesMedia, private val typeLists:
     }
 
     private fun sortData(list: MutableList<MediaEntity>?): MutableList<MediaEntity>? {
-        when(typeSort) {
+        when (typeSort) {
             TypesSort.SORT_BY_DATE_NEW_FIRST -> list?.sortByDescending { it.date }
             TypesSort.SORT_BY_DATE_OLD_FIRST -> list?.sortBy { it.date }
             TypesSort.SORT_BY_ALPHABET_A -> list?.sortBy { it.name }
