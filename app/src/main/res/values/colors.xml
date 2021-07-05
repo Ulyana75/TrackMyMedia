@@ -2,5 +2,23 @@
 <resources>
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#B073F6</color>
+
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGray">#7C7C7C</color>
+
+    <!-- Colors for background from rating. -->
+    <color name="rateZero">#FFACAC</color>
+    <color name="rateOne">#FFB6AC</color>
+    <color name="rateTwo">#FFC6AB</color>
+    <color name="rateThree">#FFD6AA</color>
+    <color name="rateFour">#FFE8AD</color>
+    <color name="rateFive">#FFF7A9</color>
+    <color name="rateSix">#E8FFAA</color>
+    <color name="rateSeven">#D5FFAA</color>
+    <color name="rateEight">#C1FFAA</color>
+    <color name="rateNine">#B0FFAB</color>
+    <color name="rateTen">#98FFA2</color>
+
 </resources>
