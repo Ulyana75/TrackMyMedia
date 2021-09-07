@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:columnCount="2"
     android:layout_margin="@dimen/app_margin_normal"
-    tools:context=".fragments.ChooseListFragment">
+    tools:context=".view.fragments.ChooseListFragment">
 
 
     <include

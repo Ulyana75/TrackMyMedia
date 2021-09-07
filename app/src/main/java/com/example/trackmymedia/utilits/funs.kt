@@ -31,7 +31,3 @@ fun addButtonBack() {
 fun removeButtonBack() {
     APP_ACTIVITY.supportActionBar?.setDisplayHomeAsUpEnabled(false)
 }
-
-fun getCurrentFragment(): Fragment {
-    return APP_ACTIVITY.supportFragmentManager.fragments[APP_ACTIVITY.supportFragmentManager.fragments.size - 1]
-}

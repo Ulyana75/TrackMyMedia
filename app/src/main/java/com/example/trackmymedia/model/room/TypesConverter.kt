@@ -1,4 +1,4 @@
-package com.example.trackmymedia.database
+package com.example.trackmymedia.model.room
 
 import android.annotation.SuppressLint
 import androidx.room.TypeConverter

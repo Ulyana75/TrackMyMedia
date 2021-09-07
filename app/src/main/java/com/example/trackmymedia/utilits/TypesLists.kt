@@ -1,5 +1,7 @@
 package com.example.trackmymedia.utilits
 
-enum class TypesLists {
+import java.io.Serializable
+
+enum class TypesLists : Serializable {
     PLANNING, DONE
 }

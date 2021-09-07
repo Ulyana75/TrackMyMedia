@@ -1,6 +1,8 @@
 package com.example.trackmymedia.utilits
 
-enum class TypesMedia(private val typeInRussian: String) {
+import java.io.Serializable
+
+enum class TypesMedia(private val typeInRussian: String) : Serializable {
     BOOK("Книги"), FILM("Фильмы"),
     SERIES("Сериалы"), GAME("Игры");
 

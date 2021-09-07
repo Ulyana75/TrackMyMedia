@@ -1,13 +1,11 @@
-package com.example.trackmymedia.fragments
+ package com.example.trackmymedia.view.fragments
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.example.trackmymedia.R
 import com.example.trackmymedia.databinding.FragmentChooseMediaBinding
 import com.example.trackmymedia.utilits.APP_ACTIVITY
@@ -18,20 +16,18 @@ import kotlinx.android.synthetic.main.fragment_choose_media.*
 import kotlinx.android.synthetic.main.main_screen_choose_item.view.*
 
 
-class ChooseMediaFragment : Fragment() {
+ class ChooseMediaFragment : Fragment() {
 
     private lateinit var binding: FragmentChooseMediaBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         binding = FragmentChooseMediaBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onStart() {
         super.onStart()
         initViews()
@@ -39,7 +35,6 @@ class ChooseMediaFragment : Fragment() {
         APP_ACTIVITY.title = "TrackMyMedia"
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun initViews() {
         binding.buttonFilms.textView.text = TypesMedia.FILM.getStringOnRussian()
@@ -54,7 +49,7 @@ class ChooseMediaFragment : Fragment() {
 
         binding.buttonFilms.mainChooseItem.setOnClickListener {
             replaceFragment(
-                ChooseListFragment(
+                ChooseListFragment.newInstance(
                     TypesMedia.FILM,
                     "Просмотрено", "Планирую посмотреть"
                 ), true
@@ -62,7 +57,7 @@ class ChooseMediaFragment : Fragment() {
         }
         binding.buttonGames.mainChooseItem.setOnClickListener {
             replaceFragment(
-                ChooseListFragment(
+                ChooseListFragment.newInstance(
                     TypesMedia.GAME,
                     "Пройдено", "Планирую пройти"
                 ), true
@@ -70,7 +65,7 @@ class ChooseMediaFragment : Fragment() {
         }
         binding.buttonBooks.mainChooseItem.setOnClickListener {
             replaceFragment(
-                ChooseListFragment(
+                ChooseListFragment.newInstance(
                     TypesMedia.BOOK,
                     "Прочитано", "Планирую прочитать"
                 ), true
@@ -78,7 +73,7 @@ class ChooseMediaFragment : Fragment() {
         }
         binding.buttonSeries.mainChooseItem.setOnClickListener {
             replaceFragment(
-                ChooseListFragment(
+                ChooseListFragment.newInstance(
                     TypesMedia.SERIES,
                     "Просмотрено", "Планирую посмотреть"
                 ), true
