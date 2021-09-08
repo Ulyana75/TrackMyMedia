@@ -1,12 +1,12 @@
 package com.example.trackmymedia.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.trackmymedia.databinding.ActivityMainBinding
-import com.example.trackmymedia.view.fragments.ChooseMediaFragment
 import com.example.trackmymedia.utilits.APP_ACTIVITY
 import com.example.trackmymedia.utilits.replaceFragment
+import com.example.trackmymedia.view.fragments.ChooseMediaFragment
 
 class MainActivity : AppCompatActivity() {
 

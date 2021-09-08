@@ -6,7 +6,7 @@ import com.example.trackmymedia.model.entities.MediaEntity
 class MediaDiffUtilCallback(
     private val oldList: List<MediaEntity>,
     private val newList: List<MediaEntity>
-) : DiffUtil.Callback()  {
+) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int = oldList.size
 

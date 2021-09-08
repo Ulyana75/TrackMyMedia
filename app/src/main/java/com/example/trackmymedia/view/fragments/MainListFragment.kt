@@ -55,7 +55,8 @@ class MainListFragment : Fragment() {
         typeMedia = arguments?.get(key_type_media) as TypesMedia?
         typeLists = arguments?.get(key_type_list) as TypesLists?
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(APP_ACTIVITY).get(MainViewModel::class.java)
+        viewModel.cleanValue()
 
         binding = FragmentMainListBinding.inflate(inflater, container, false)
 
@@ -65,10 +66,9 @@ class MainListFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        if(typeMedia != null && typeLists != null) {
-            viewModel.setTypes(typeMedia!!, typeLists!!)
-            typeSort = viewModel.initSortState()
-            viewModel.getEntities()
+        if (typeMedia != null && typeLists != null) {
+            typeSort = viewModel.initSortState(typeMedia!!, typeLists!!)
+            viewModel.getEntities(typeMedia!!, typeLists!!)
             initViews()
         }
         addButtonBack()
@@ -77,7 +77,7 @@ class MainListFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        viewModel.saveSortState()
+        viewModel.saveSortState(typeMedia!!, typeLists!!)
     }
 
     private fun initViews() {
@@ -107,7 +107,6 @@ class MainListFragment : Fragment() {
         })
 
         viewModel.mediaLiveData.observe(this) {
-
             val diffResult = DiffUtil.calculateDiff(
                 MediaDiffUtilCallback(
                     adapter.getData(),
@@ -130,9 +129,11 @@ class MainListFragment : Fragment() {
         val popup = PopupMenu(requireContext(), view)
         popup.inflate(R.menu.item_context_menu)
         popup.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.delete -> {
-                    viewModel.delete(item)
+                    viewModel.delete(item) {
+                        viewModel.getEntities(typeMedia!!, typeLists!!)
+                    }
                 }
             }
             true
@@ -169,7 +170,7 @@ class MainListFragment : Fragment() {
                 R.id.sort_by_rating_bad_first -> TypesSort.SORT_BY_RATING_BAD_FIRST
                 else -> typeSort
             }
-        viewModel.setSortType(typeSort)
+        viewModel.setSortType(typeSort, typeMedia!!, typeLists!!)
         return super.onOptionsItemSelected(item)
     }
 

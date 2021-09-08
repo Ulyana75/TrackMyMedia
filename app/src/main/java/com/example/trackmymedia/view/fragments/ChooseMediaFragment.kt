@@ -1,4 +1,4 @@
- package com.example.trackmymedia.view.fragments
+package com.example.trackmymedia.view.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,11 +12,9 @@ import com.example.trackmymedia.utilits.APP_ACTIVITY
 import com.example.trackmymedia.utilits.TypesMedia
 import com.example.trackmymedia.utilits.removeButtonBack
 import com.example.trackmymedia.utilits.replaceFragment
-import kotlinx.android.synthetic.main.fragment_choose_media.*
-import kotlinx.android.synthetic.main.main_screen_choose_item.view.*
 
 
- class ChooseMediaFragment : Fragment() {
+class ChooseMediaFragment : Fragment() {
 
     private lateinit var binding: FragmentChooseMediaBinding
 

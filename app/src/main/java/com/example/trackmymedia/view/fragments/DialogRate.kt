@@ -3,25 +3,20 @@ package com.example.trackmymedia.view.fragments
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.Dialog
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.SeekBar
-import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.example.trackmymedia.R
-import com.example.trackmymedia.model.room.AppDatabase
 import com.example.trackmymedia.model.entities.MediaEntity
 import com.example.trackmymedia.utilits.APP_ACTIVITY
 import com.example.trackmymedia.utilits.TypesLists
+import com.example.trackmymedia.utilits.TypesMedia
 import com.example.trackmymedia.utilits.key_entity
 import com.example.trackmymedia.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.dialog_rate.view.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.util.*
 
 class DialogRate : DialogFragment() {
@@ -44,11 +39,12 @@ class DialogRate : DialogFragment() {
         }
     }
 
+    @SuppressLint("InflateParams")
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         entity = arguments?.get(key_entity) as MediaEntity?
 
         _view = APP_ACTIVITY.layoutInflater.inflate(R.layout.dialog_rate, null)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(APP_ACTIVITY).get(MainViewModel::class.java)
 
         val alertBuilder = AlertDialog.Builder(APP_ACTIVITY)
             .setView(_view)
@@ -77,13 +73,21 @@ class DialogRate : DialogFragment() {
 
         })
 
+        var typeMedia: TypesMedia
+        var typeList: TypesLists
+
         _view.button_done.setOnClickListener {
             if (entity != null) {
+                typeMedia = entity!!.type
+                typeList = entity!!.typeList
+
                 entity!!.rating = _view.seek_bar.progress
                 entity!!.typeList = TypesLists.DONE
                 entity!!.date = Calendar.getInstance().time
 
-                viewModel.update(entity!!)
+                viewModel.update(entity!!) {
+                    viewModel.getEntities(typeMedia, typeList)
+                }
 
                 dialog?.dismiss()
             }
@@ -91,10 +95,15 @@ class DialogRate : DialogFragment() {
 
         _view.button_dont_rate.setOnClickListener {
             if (entity != null) {
+                typeMedia = entity!!.type
+                typeList = entity!!.typeList
+
                 entity!!.typeList = TypesLists.DONE
                 entity!!.date = Calendar.getInstance().time
 
-                viewModel.update(entity!!)
+                viewModel.update(entity!!) {
+                    viewModel.getEntities(typeMedia, typeList)
+                }
 
                 dialog?.dismiss()
             }

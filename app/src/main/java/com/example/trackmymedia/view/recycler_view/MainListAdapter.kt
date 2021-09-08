@@ -9,7 +9,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.trackmymedia.R
 import com.example.trackmymedia.model.entities.MediaEntity
-import com.example.trackmymedia.utilits.*
+import com.example.trackmymedia.utilits.APP_ACTIVITY
+import com.example.trackmymedia.utilits.ColorsManager
+import com.example.trackmymedia.utilits.NO_RATING_VALUE
+import com.example.trackmymedia.utilits.TypesLists
 import com.example.trackmymedia.view.fragments.DialogRate
 import kotlinx.android.synthetic.main.recyclerview_item.view.*
 
@@ -54,7 +57,7 @@ class MainListAdapter(
             true
         }
 
-        setBackground(holder.view, entity.rating)
+        setBackground(holder.itemView, entity.rating)
     }
 
     private fun setBackground(view: View, rating: Int?) {
@@ -75,7 +78,7 @@ class MainListAdapter(
     }
 
 
-    class MainListHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class MainListHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val name: TextView = view.text_item_name
         val description: TextView = view.text_item_description

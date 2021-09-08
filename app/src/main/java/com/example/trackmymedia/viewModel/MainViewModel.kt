@@ -24,23 +24,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val dataSource: MediaDataSource = RoomMediaDataSource(application.applicationContext)
 
     private var typeSort: TypesSort = TypesSort.SORT_BY_DATE_OLD_FIRST
-    private lateinit var typeMedia: TypesMedia
-    private lateinit var typeList: TypesLists
 
 
-    fun setTypes(typeMedia: TypesMedia, typeLists: TypesLists) {
-        this.typeMedia = typeMedia
-        this.typeList = typeLists
-    }
-
-    fun setSortType(typeSort: TypesSort) {
+    fun setSortType(typeSort: TypesSort, typeMedia: TypesMedia, typeList: TypesLists) {
         this.typeSort = typeSort
-        getEntities()
+        getEntities(typeMedia, typeList)
     }
 
-    fun getEntities() {
+    fun cleanValue() {
+        _mediaLiveData.value = listOf()
+    }
+
+    fun getEntities(typeMedia: TypesMedia, typeList: TypesLists) {
         doAsync {
-            _mediaLiveData.postValue(sortData(dataSource.getAll(typeMedia, typeList).toMutableList()))
+            val data = sortData(dataSource.getAll(typeMedia, typeList).toMutableList())
+            _mediaLiveData.postValue(data)
         }
     }
 
@@ -58,14 +56,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         return list
     }
 
-    fun saveSortState() {
+    fun saveSortState(typeMedia: TypesMedia, typeList: TypesLists) {
         val sPref = APP_ACTIVITY.getPreferences(Context.MODE_PRIVATE)
         val editor = sPref.edit()
         editor.putString(typeMedia.toString() + typeList.toString(), typeSort.toString())
         editor.apply()
     }
 
-    fun initSortState(): TypesSort {
+    fun initSortState(typeMedia: TypesMedia, typeList: TypesLists): TypesSort {
         val sPref = APP_ACTIVITY.getPreferences(Context.MODE_PRIVATE)
         val type = sPref.getString(
             typeMedia.toString() + typeList.toString(),
@@ -79,21 +77,20 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(entity: MediaEntity) {
         doAsync {
             dataSource.insert(entity)
-            getEntities()
         }
     }
 
-    fun update(entity: MediaEntity) {
+    fun update(entity: MediaEntity, callback: () -> Unit = {}) {
         doAsync {
             dataSource.update(entity)
-            getEntities()
+            callback()
         }
     }
 
-    fun delete(entity: MediaEntity) {
+    fun delete(entity: MediaEntity, callback: () -> Unit = {}) {
         doAsync {
             dataSource.delete(entity)
-            getEntities()
+            callback()
         }
     }
 

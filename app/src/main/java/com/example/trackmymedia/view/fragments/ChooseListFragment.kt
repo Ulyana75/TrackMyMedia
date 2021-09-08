@@ -1,4 +1,4 @@
- package com.example.trackmymedia.view.fragments
+package com.example.trackmymedia.view.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -12,7 +12,7 @@ import com.example.trackmymedia.databinding.FragmentChooseListBinding
 import com.example.trackmymedia.utilits.*
 
 
- class ChooseListFragment : Fragment() {
+class ChooseListFragment : Fragment() {
 
     private lateinit var binding: FragmentChooseListBinding
 
@@ -55,7 +55,7 @@ import com.example.trackmymedia.utilits.*
 
     override fun onStart() {
         super.onStart()
-        if(typeMedia != null) {
+        if (typeMedia != null) {
             initViews()
         }
         addButtonBack()

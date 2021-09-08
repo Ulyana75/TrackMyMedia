@@ -31,7 +31,11 @@ class EditingFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(typeMedia: TypesMedia, typeList: TypesLists, entity: MediaEntity? = null): EditingFragment {
+        fun newInstance(
+            typeMedia: TypesMedia,
+            typeList: TypesLists,
+            entity: MediaEntity? = null
+        ): EditingFragment {
             val fragment = EditingFragment()
             fragment.arguments = bundleOf(
                 key_type_media to typeMedia,
@@ -48,7 +52,7 @@ class EditingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(APP_ACTIVITY).get(MainViewModel::class.java)
 
         typeMedia = arguments?.get(key_type_media) as TypesMedia?
         typeLists = arguments?.get(key_type_list) as TypesLists?
@@ -60,8 +64,7 @@ class EditingFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if(typeMedia != null && typeLists != null) {
-            viewModel.setTypes(typeMedia!!, typeLists!!)
+        if (typeMedia != null && typeLists != null) {
             initViews()
         }
         addButtonBack()
