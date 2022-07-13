@@ -11,6 +11,8 @@
 
 Реализована архитектура **MVVM**.
 
+**APK-файл для установки: [ссылка](https://drive.google.com/file/d/1o6i-eT0rPItlDq-1VtgZdxr5FfqKGkRB/view?usp=sharing)**
+
 ---
 
 **Скриншоты из приложения.**
